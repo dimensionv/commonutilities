@@ -57,7 +57,7 @@ public class StringUtils {
     final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
     char[] hexChars = new char[bytes.length << 1];
     for (int i = 0; i < bytes.length; i++) {
-      int value = bytes[i] & 0xFF;
+      int value = bytes[i] & 0xFF; // extract lower byte
       int hexIndex = i << 1;
       hexChars[hexIndex] = hexArray[value >>> 4];
       hexChars[hexIndex + 1] = hexArray[value & 0x0F];
@@ -76,7 +76,8 @@ public class StringUtils {
    */
   public static String sha1Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     MessageDigest md = MessageDigest.getInstance("SHA-1");
-    md.update(text.getBytes("UTF-8"), 0, text.length());
+    byte[] bytes = text.getBytes("UTF-8");
+    md.update(text.getBytes("UTF-8"));
     return bytesToHex(md.digest());
   }
 
@@ -91,7 +92,7 @@ public class StringUtils {
    */
   public static String md5Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     MessageDigest md = MessageDigest.getInstance("MD5");
-    md.update(text.getBytes("UTF-8"), 0, text.length());
+    md.update(text.getBytes("UTF-8"));
     return bytesToHex(md.digest());
   }
 }

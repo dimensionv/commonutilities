@@ -2,3 +2,4 @@ build
 dist
 nbproject
 target
+nb-configuration.xml

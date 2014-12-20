@@ -10,10 +10,9 @@
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <description>
-    Collection of classes providing commonly used utility functions in Java
-  </description>
+  <description>Collection of classes providing commonly used utility functions in Java</description>
 
+  <!-- Licenses of this project -->
   <licenses>
     <license>
       <name>Simplified BSD or BSD 2-Clause</name>
@@ -23,6 +22,7 @@
 
   <url>https://github.com/dimensionv/commonutilities</url>
 
+  <!-- Contributing developers information -->
   <developers>
     <developer>
       <id>dimensionv</id>
@@ -33,6 +33,7 @@
     </developer>
   </developers>
 
+  <!-- Source control management information -->
   <scm>
     <connection>
       https://github.com/dimensionv/commonutilities.git
@@ -45,6 +46,18 @@
     </url>
   </scm>
 
+  <!-- Dependencies of this project -->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+
+  <!-- Build system information -->
   <build>
     <finalName>commonutilities</finalName>
     <plugins>
@@ -130,6 +143,7 @@
     </plugins>
   </build>
 
+  <!-- Information necessary for actual MavenCentral deployment -->
   <distributionManagement>
     <repository>
       <id>mcentral</id>
