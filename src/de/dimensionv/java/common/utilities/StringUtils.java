@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * This is a utility class for common string-related operations. Many of these methods are thus available statically.
  *
- * @author Mjoellnir <vs@dimensionv.de>
+ * @author Mjoellnir &lt;vs@dimensionv.de&gt;
  */
 public class StringUtils {
 
