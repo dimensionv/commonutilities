@@ -1,22 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>de.dimensionv</groupId>
   <artifactId>commonutilities</artifactId>
   <name>Common Java Utility Classes</name>
   <version>1.0.0</version>
+  <packaging>jar</packaging>
 
   <description>
     Collection of classes providing commonly used utility functions in Java
   </description>
+
   <licenses>
     <license>
       <name>Simplified BSD or BSD 2-Clause</name>
       <url>http://opensource.org/licenses/BSD-2-Clause</url>
     </license>
   </licenses>
+
   <url>https://github.com/dimensionv/commonutilities</url>
+
   <developers>
     <developer>
       <id>dimensionv</id>
@@ -26,6 +32,7 @@
       <roles></roles>
     </developer>
   </developers>
+
   <scm>
     <connection>
       https://github.com/dimensionv/commonutilities.git
@@ -37,6 +44,7 @@
       https://github.com/dimensionv/commonutilities
     </url>
   </scm>
+
   <build>
     <finalName>commonutilities</finalName>
     <plugins>
