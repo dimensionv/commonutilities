@@ -7,7 +7,7 @@
   <groupId>de.dimensionv</groupId>
   <artifactId>commonutilities</artifactId>
   <name>Common Java Utility Classes</name>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>jar</packaging>
 
   <description>Collection of classes providing commonly used utility functions in Java</description>
