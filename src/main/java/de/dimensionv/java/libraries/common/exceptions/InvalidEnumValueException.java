@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, vseifert
+ * Copyright (c) 2014, Volkmar Seifert, DimensionV.de
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,22 +64,54 @@ package de.dimensionv.java.libraries.common.exceptions;
  * }
  * </pre>
  *
- * @author vseifert
+ * <p>
+ * Since class version 1.1, API version 1.3.0, this class extends InvalidValueException. Therefore, the method
+ * <code>getValue()</code> now returns an <code>Object</code> (which contains an <code>Integer</code>-instance). In
+ * order to retrieve the <code>int</code>-value directly, please use the method <code>getIntValue()</code>.</p>
+ *
+ * @author Volkmar Seifert &lt;vs@DimensionV.de&gt;
+ *
+ * @version 1.1
+ * @since API 1.0.0
  */
-public class InvalidEnumValueException extends RuntimeException {
+public class InvalidEnumValueException extends InvalidValueException {
 
-  private final int value;
   private final int maximum;
 
+  /**
+   * Constructor that accepts the invalid value and the allowed maximum for the appropriate <code>enum</code>.
+   *
+   * @param value The invalid value.
+   * @param maximum The allowed maximum for the <code>enum</code>.
+   *
+   * @since Class 1.0
+   * @since API 1.0.0
+   */
   public InvalidEnumValueException(int value, int maximum) {
-    this.value = value;
+    super(value);
     this.maximum = maximum;
   }
 
-  public int getValue() {
-    return value;
+  /**
+   * Returns the value that is said to be invalid explicitly as an integer primitive.
+   *
+   * @return the value the value handed over to the constructor.
+   *
+   * @since Class 1.1
+   * @since API 1.3.0
+   */
+  public int getIntValue() {
+    return (Integer) getValue();
   }
 
+  /**
+   * Returns the allowed maximum value.
+   *
+   * @return the value the allowed maximum value handed over to the constructor.
+   *
+   * @since Class 1.0
+   * @since API 1.0.0
+   */
   public int getMaximum() {
     return maximum;
   }

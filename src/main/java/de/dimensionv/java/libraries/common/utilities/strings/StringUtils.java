@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- * Copyright (c) 2014, Volkmar Seifert, Dimension V
+ * Copyright (c) 2014, Volkmar Seifert, DimensionV.de
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package de.dimensionv.java.libraries.common.utilities;
+package de.dimensionv.java.libraries.common.utilities.strings;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -42,7 +42,10 @@ import java.util.regex.Pattern;
 /**
  * This is a utility class for common string-related operations. Many of these methods are thus available statically.
  *
- * @author Mjoellnir <vs@dimensionv.de>
+ * @author Volkmar Seifert &lt;vs@DimensionV.de&gt;
+ *
+ * @version 1.0
+ * @since API 1.0.0
  */
 public class StringUtils {
 

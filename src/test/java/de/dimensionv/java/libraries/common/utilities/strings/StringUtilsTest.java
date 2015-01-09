@@ -11,7 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /*
- * Copyright (c) 2014, Volkmar Seifert, Dimension V
+ * Copyright (c) 2014, Volkmar Seifert, DimensionV.de
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package de.dimensionv.java.libraries.common.utilities;
+package de.dimensionv.java.libraries.common.utilities.strings;
 
 import org.junit.After;
 import org.junit.AfterClass;
