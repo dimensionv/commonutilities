@@ -7,7 +7,7 @@
   <groupId>de.dimensionv</groupId>
   <artifactId>commonutilities</artifactId>
   <name>Common Java Utility Classes</name>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <packaging>jar</packaging>
 
   <description>Collection of classes providing commonly used utility functions in Java</description>
@@ -150,6 +150,11 @@
       <name>Maven Central Release Repository</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
     </repository>
+    <snapshotRepository>
+      <id>mcentral</id>
+      <name>Maven Central Release Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
   <profiles>
     <profile>
