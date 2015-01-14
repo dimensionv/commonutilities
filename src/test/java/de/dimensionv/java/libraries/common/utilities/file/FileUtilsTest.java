@@ -25,6 +25,7 @@
  */
 package de.dimensionv.java.libraries.common.utilities.file;
 
+import de.dimensionv.java.libraries.common.exceptions.InvalidValueException;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,11 +44,14 @@ import org.junit.Test;
 public class FileUtilsTest {
 
   public static final String EXTENSION = ".png";
-  public static final String FILE_NAME = "test" + EXTENSION;
+  public static final String FILE_NAME_BASE = "test";
+  public static final String FILE_NAME = FILE_NAME_BASE + EXTENSION;
   public static final String PATH_NAME = "/tmp";
   public static final String FILE_PATH = PATH_NAME + "/" + FILE_NAME;
   public static final String URI_STRING_FILE = "file://" + FILE_PATH;
-  public static final String URI_STRING_HTTPS = "https://www.dimensionv.de/" + FILE_NAME;
+  public static final String URI_STRING_FILE_EMPTY = "file://";
+  public static final String URI_STRING_HTTPS_BASE = "https://www.dimensionv.de";
+  public static final String URI_STRING_HTTPS = URI_STRING_HTTPS_BASE + "/" + FILE_NAME;
   public static final File PATH = new File(PATH_NAME);
   public static final File FILE = new File(FILE_PATH);
   public static final List<File> FILE_LIST = new ArrayList<File>(
@@ -59,7 +63,9 @@ public class FileUtilsTest {
       })
   );
   public URI uriFile;
+  public URI uriFileEmpty;
   public URI uriHttps;
+  public URI uriEmpty;
 
   public FileUtilsTest() {
   }
@@ -68,6 +74,7 @@ public class FileUtilsTest {
   public void setUp() throws URISyntaxException {
     uriFile = new URI(URI_STRING_FILE);
     uriHttps = new URI(URI_STRING_HTTPS);
+    uriEmpty = new URI("");
   }
 
   @After
@@ -107,6 +114,16 @@ public class FileUtilsTest {
   }
 
   /**
+   * Test of getExtension method, of class FileUtils.
+   */
+  @Test
+  public void testGetExtensionEmpty() {
+    System.out.println("getExtension");
+    String result = FileUtils.getExtension(FILE_NAME_BASE);
+    Assert.assertEquals("", result);
+  }
+
+  /**
    * Test of getPathWithoutFilename method, of class FileUtils.
    */
   @Test
@@ -118,6 +135,16 @@ public class FileUtilsTest {
   }
 
   /**
+   * Test of getPathWithoutFilename method, of class FileUtils.
+   */
+  @Test
+  public void testGetPathWithoutFilenameWithDirectory() {
+    System.out.println("getPathWithoutFilename with directory");
+    File result = FileUtils.getPathWithoutFilename(PATH);
+    Assert.assertEquals(PATH, result);
+  }
+
+  /**
    * Test of getFile method, of class FileUtils.
    */
   @Test
@@ -125,6 +152,24 @@ public class FileUtilsTest {
     System.out.println("getFile");
     File result = FileUtils.getFile(uriFile);
     Assert.assertEquals(FILE, result);
+  }
+
+  /**
+   * Test of getFile method, of class FileUtils.
+   */
+  @Test(expected = InvalidValueException.class)
+  public void testGetFile_URI_InvalidScheme() {
+    System.out.println("getFile with invalid scheme");
+    File result = FileUtils.getFile(uriHttps);
+  }
+
+  /**
+   * Test of getFile method, of class FileUtils.
+   */
+  @Test(expected = InvalidValueException.class)
+  public void testGetFile_URI_InvalidPath() {
+    System.out.println("getFile with empty URI");
+    File result = FileUtils.getFile(uriEmpty);
   }
 
   /**

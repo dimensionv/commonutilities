@@ -37,6 +37,7 @@
  */
 package de.dimensionv.java.libraries.common.utilities.strings;
 
+import de.dimensionv.java.libraries.common.exceptions.InvalidIntegerValueException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -51,6 +52,13 @@ import org.junit.Test;
 public class StringUtilsTest {
 
   private static final String TEST_STRING = "The quick brown fox jumps over the lazy dog";
+  private static final String TEST_STRING_2 = "           ";
+
+  private static final char TEST_NEEDLE_CHAR = ' ';
+  private static final int TEST_OCCURRENCES_CHAR = 8;
+  private static final int TEST_OCCURRENCES_CHAR2 = TEST_STRING_2.length();
+  private static final String TEST_NEEDLE_STRING = "fox";
+  private static final int TEST_OCCURRENCES_STRING = 1;
 
   private static final String TEST_HASH_SHA1 = "2fd4e1c67a2d28fced849ee1bb76e7391b93eb12";
   private static final byte[] TEST_HASH_SHA1_BYTES = new byte[]{
@@ -70,6 +78,9 @@ public class StringUtilsTest {
 
   private static final byte[] TEST_BYTES = new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0x3A, 0x3D, 0x3F};
   private static final String TEST_HEX = "0102030405060708090A0B0C0D0E0F103A3D3F";
+
+  private static final String TEST_COLON_SEP_STRING = "a:b:c:d:e:f:";
+  private static final String[] TEST_COLON_SPLITTED_FULL = new String[]{"a", "b", "c", "d", "e", "f"};
 
   public StringUtilsTest() {
   }
@@ -318,5 +329,78 @@ public class StringUtilsTest {
     int size = expResult.length();
     String result = StringUtils.shorten(TEST_STRING, size, StringUtils.SHORTEN_END);
     Assert.assertEquals(expResult, result);
+  }
+
+  /**
+   * Test of shorten method, of class StringUtils.
+   */
+  @Test(expected = InvalidIntegerValueException.class)
+  public void testShorten_Exception() {
+    System.out.println("shorten exception");
+    int size = TEST_STRING.length() >>> 1;
+    String result = StringUtils.shorten(TEST_STRING, size, 25);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_char() {
+    System.out.println("countOccurrences String/Char 1");
+    int result = StringUtils.countOccurrences(TEST_STRING, TEST_NEEDLE_CHAR);
+    Assert.assertEquals(TEST_OCCURRENCES_CHAR, result);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_char2() {
+    System.out.println("countOccurrences String/Char 2");
+    int result = StringUtils.countOccurrences(TEST_STRING_2, TEST_NEEDLE_CHAR);
+    Assert.assertEquals(TEST_OCCURRENCES_CHAR2, result);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_String() {
+    System.out.println("countOccurrences String/String 1");
+    int result = StringUtils.countOccurrences(TEST_STRING, TEST_NEEDLE_STRING);
+    Assert.assertEquals(TEST_OCCURRENCES_STRING, result);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_String2() {
+    System.out.println("countOccurrences String/Char 2");
+    int result = StringUtils.countOccurrences(TEST_STRING_2, Character.toString(TEST_NEEDLE_CHAR));
+    Assert.assertEquals(TEST_OCCURRENCES_CHAR2, result);
+  }
+
+  @Test
+  public void testSimpleSplit() {
+    System.out.println("Testing simpleSplit() method");
+    String[] result = StringUtils.simpleSplit(TEST_COLON_SEP_STRING, ':');
+    Assert.assertArrayEquals(TEST_COLON_SPLITTED_FULL, result);
+  }
+
+  @Test
+  public void testSimpleSplitWithZeroOffset() {
+    System.out.println("Testing simpleSplit() method with zero Offset");
+    String[] result = StringUtils.simpleSplit(TEST_COLON_SEP_STRING, ':', 0);
+    Assert.assertArrayEquals(TEST_COLON_SPLITTED_FULL, result);
+  }
+
+  @Test
+  public void testSimpleSplitWithOffsetFour() {
+    System.out.println("Testing simpleSplit() method with zero Offset");
+    //String[] expectedResult = new String[]{"c", "d", "e", "f"};
+    String[] expectedResult = new String[]{"c", "d", "e", "f"};
+    String[] result = StringUtils.simpleSplit(TEST_COLON_SEP_STRING, ':', 4);
+    Assert.assertArrayEquals(expectedResult, result);
   }
 }

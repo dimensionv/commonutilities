@@ -33,6 +33,7 @@
  */
 package de.dimensionv.java.libraries.common.utilities.strings;
 
+import de.dimensionv.java.libraries.common.exceptions.InvalidIntegerValueException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,7 +45,7 @@ import java.util.regex.Pattern;
  *
  * @author Volkmar Seifert &lt;vs@DimensionV.de&gt;
  *
- * @version 1.0
+ * @version 1.4
  * @since API 1.0.0
  */
 public class StringUtils {
@@ -54,11 +55,18 @@ public class StringUtils {
   private static final String HASH_SHA1 = "SHA-1";
   private static final String HASH_MD5 = "MD5";
 
+  private static final String SHORTEN_STRING = "...";
+
   public static final int SHORTEN_START = 1;
   public static final int SHORTEN_MIDDLE = 2;
   public static final int SHORTEN_END = 3;
 
-  private static final String SHORTEN_STRING = "...";
+  public static final String EMPTY_STRING = "";
+  public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+  private StringUtils() {
+    // this ensures that the class cannot be instantiated...
+  }
 
   /**
    * Universal check on String-objects that even works on non-instantiated variables (null-references), as it checks for
@@ -68,6 +76,9 @@ public class StringUtils {
    *
    * @param text The string-object to be checked
    * @return true if the given string-object is empty according to the rules described above.
+   *
+   * @since Class 1.0
+   * @since API 1.0.0
    */
   public static boolean isEmpty(String text) {
     if (text == null) {
@@ -89,6 +100,9 @@ public class StringUtils {
    *
    * @param bytes the array to convert into hexadecimal string
    * @return the String containing the hexadecimal representation of the array
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String bytesToHex(byte[] bytes) {
     final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -109,6 +123,9 @@ public class StringUtils {
    *
    * @param hex String of pairs of hexadecimal numbers
    * @return byte-array with the binary representation of the hex-string
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static byte[] hexToBytes(String hex) {
     byte[] bytes = new byte[hex.length() >> 1];
@@ -129,6 +146,9 @@ public class StringUtils {
    * @return the hexadecimal representation of the hash
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String sha1Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return bytesToHex(computeHash(text, HASH_SHA1));
@@ -142,6 +162,9 @@ public class StringUtils {
    * @return a truncated int-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int sha1HashInt(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToInt(computeHash(text, HASH_SHA1));
@@ -155,6 +178,9 @@ public class StringUtils {
    * @return a truncated long-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long sha1HashLong(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToLong(computeHash(text, HASH_SHA1));
@@ -168,6 +194,9 @@ public class StringUtils {
    * @return the hexadecimal representation of the hash
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String md5Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return bytesToHex(computeHash(text, HASH_MD5));
@@ -181,6 +210,9 @@ public class StringUtils {
    * @return a truncated int-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int md5HashInt(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToInt(computeHash(text, HASH_MD5));
@@ -194,6 +226,9 @@ public class StringUtils {
    * @return a truncated long-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long md5HashLong(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToLong(computeHash(text, HASH_MD5));
@@ -204,6 +239,9 @@ public class StringUtils {
    *
    * @param hash the hash-string
    * @return truncated code as int
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int truncateHashToInt(String hash) {
     return truncateHashToInt(hexToBytes(hash));
@@ -214,6 +252,9 @@ public class StringUtils {
    *
    * @param bytes hash-value as a byte-array
    * @return truncated code as int
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int truncateHashToInt(byte[] bytes) {
     int offset = bytes[bytes.length - 1] & 0x0f;
@@ -228,6 +269,9 @@ public class StringUtils {
    *
    * @param hash the hash-string
    * @return truncated code as long
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long truncateHashToLong(String hash) {
     return truncateHashToLong(hexToBytes(hash));
@@ -238,6 +282,9 @@ public class StringUtils {
    *
    * @param bytes the hash-value as a byte-array
    * @return truncated code as long
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long truncateHashToLong(byte[] bytes) {
     int offset = bytes[bytes.length - 1] & 0x0c;
@@ -265,31 +312,151 @@ public class StringUtils {
    * @param size The size the text is to shortened to.
    * @param mode The mode in which the string shall be shortened
    * @return The shortened string.
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
-  public static String shorten(String text, int size, int mode) {
+  public static String shorten(final String text, final int size, final int mode) {
     StringBuilder temp = null;
-    size = Math.min(text.length(), size);
+    final int shortLength = SHORTEN_STRING.length();
+    final int effectiveSize = Math.min(text.length(), size);
     switch (mode) {
       case SHORTEN_START: {
-        int length = size - 3;
+        int length = effectiveSize - shortLength;
         temp = new StringBuilder(SHORTEN_STRING);
         temp.append(text.substring(text.length() - length));
         break;
       }
       case SHORTEN_MIDDLE: {
-        int length = size >> 1;
-        temp = new StringBuilder(text.substring(0, length - 3));
+        int length = effectiveSize >> 1;
+        temp = new StringBuilder(text.substring(0, length - shortLength));
         temp.append(SHORTEN_STRING);
         temp.append(text.substring(text.length() - length));
         break;
       }
       case SHORTEN_END: {
-        int length = size - 3;
+        int length = effectiveSize - shortLength;
         temp = new StringBuilder(text.substring(0, length));
         temp.append(SHORTEN_STRING);
         break;
       }
+      default: {
+        throw new InvalidIntegerValueException(mode);
+      }
     }
     return temp.toString();
+  }
+
+  /**
+   * Counts the number of occurrences of the given character.
+   *
+   * @param haystack The string in which to search for the given character.
+   * @param needle The character to search for.
+   * @return The total number of occurrences of the given character.
+   *
+   * @since Class 1.3
+   * @since API 1.4.0
+   */
+  public static int countOccurrences(String haystack, char needle) {
+    int result = 0;
+    int index = haystack.indexOf(needle, 0);
+    int length = haystack.length();
+    while (index > -1) {
+      result++;
+      int startFrom = index + 1;
+      index = (startFrom < length) ? haystack.indexOf(needle, startFrom) : -1;
+    }
+    return result;
+  }
+
+  /**
+   * Counts the number of occurrences of the given character.
+   *
+   * @param haystack The string in which to search for the given character.
+   * @param needle The character to search for.
+   * @return The total number of occurrences of the given character.
+   *
+   * @since Class 1.3
+   * @since API 1.4.0
+   */
+  public static int countOccurrences(String haystack, String needle) {
+    int result = 0;
+    int index = haystack.indexOf(needle, 0);
+    int haystackLength = haystack.length();
+    int needleLength = needle.length();
+    while (index > -1) {
+      result++;
+      int startFrom = index + needleLength;
+      index = (startFrom < haystackLength) ? haystack.indexOf(needle, startFrom) : -1;
+    }
+    return result;
+  }
+
+  /**
+   * <p>
+   * Performs a simple splitting of the given {@link String} {@code string} at the given {@code delimiter}. Opposite to
+   * the method {@link String#split(java.lang.String)}, this method does not use regular expressions, but a simple
+   * character matching algorithm. That means, this method is much faster, though less flexible regarding the
+   * delimiters.</p>
+   * <p>
+   * This {@link #simpleSplit(java.lang.String, char)} method always starts a the beginning of the given
+   * {@code string}.</p>
+   *
+   * @param string The {@link String} to split.
+   * @param delimiter The {@code char} at which the given {@code string} is split up.
+   * @return Array of {@link String}s
+   *
+   * @since Class 1.4, API 2.1.0
+   */
+  public static String[] simpleSplit(String string, char delimiter) {
+    return simpleSplit(string, delimiter, 0);
+  }
+
+  /**
+   * <p>
+   * Performs a simple splitting of the given {@link String} {@code string} at the given {@code delimiter}. Opposite to
+   * the method {@link String#split(java.lang.String)}, this method does not use regular expressions, but a simple
+   * character matching algorithm. That means, this method is much faster, though less flexible regarding the
+   * delimiters.</p>
+   * <p>
+   * This {@link #simpleSplit(java.lang.String, char, int) } method starts at the given {@code startOffset} of the given
+   * {@code string}, which means it can be any position within the string.</p>
+   *
+   * @param string The {@link String} to split.
+   * @param delimiter The {@code char} at which the given {@code string} is split up.
+   * @param startOffset The {@code offset} to start looking for the {@code delimiter} from within {@code string}.
+   * @return Array of {@link String}s
+   *
+   * @since Class 1.4, API 2.1.0
+   */
+  public static String[] simpleSplit(String string, char delimiter, int startOffset) {
+    int max = StringUtils.countOccurrences(string, delimiter) + 1;
+    String[] strings = new String[max];
+
+    if (max == 1) {
+      // no delimiter found, fill strings array with given string and return
+      strings[0] = string;
+      return strings;
+    }
+
+    int count = 0;
+    int offset = startOffset;
+    int colonPos;
+    int length = string.length();
+    while (((colonPos = string.indexOf(delimiter, offset)) > -1) && (count < max) && (offset < length)) {
+      String item = string.substring(offset, colonPos);
+      if (!item.isEmpty()) {
+        strings[count++] = item;
+      }
+      offset = colonPos + 1;
+    }
+
+    if (count < max) {
+      String[] tmp = new String[count];
+      System.arraycopy(strings, 0, tmp, 0, count);
+      strings = tmp;
+    }
+
+    return strings;
   }
 }
