@@ -30,6 +30,7 @@ import de.dimensionv.java.libraries.common.utilities.file.comparators.FileNameCo
 import de.dimensionv.java.libraries.common.utilities.file.filefilters.AbstractFileFilter;
 import de.dimensionv.java.libraries.common.utilities.file.filefilters.DirectoryFileFilter;
 import de.dimensionv.java.libraries.common.utilities.file.filefilters.FileFileFilter;
+import de.dimensionv.java.libraries.common.utilities.strings.StringUtils;
 import java.io.File;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -223,15 +224,12 @@ public class FileUtils {
    * @since API 1.3.0
    */
   public static String getPath(URI uri) {
-    String scheme = uri.getScheme().toLowerCase(Locale.US); // a scheme must be in US-ASCII
-    if (!"file".equals(scheme)) {
+    String scheme = uri.getScheme();
+    if (StringUtils.isEmpty(scheme) || (!"file".equals(scheme.toLowerCase(Locale.US)))) {
       throw new InvalidValueException(uri);
     }
-    String path = uri.getPath();
-    if (path == null) {
-      throw new InvalidValueException(uri);
-    }
-    return path;
+    // getPath() can't return null for file:// scheme, because that would mean "file://", which wouldn't parse into URI
+    return uri.getPath();
   }
 
   /**
