@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
  *
  * @author Volkmar Seifert &lt;vs@DimensionV.de&gt;
  *
- * @version 1.0
+ * @version 1.3
  * @since API 1.0.0
  */
 public class StringUtils {
@@ -68,6 +68,9 @@ public class StringUtils {
    *
    * @param text The string-object to be checked
    * @return true if the given string-object is empty according to the rules described above.
+   *
+   * @since Class 1.0
+   * @since API 1.0.0
    */
   public static boolean isEmpty(String text) {
     if (text == null) {
@@ -89,6 +92,9 @@ public class StringUtils {
    *
    * @param bytes the array to convert into hexadecimal string
    * @return the String containing the hexadecimal representation of the array
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String bytesToHex(byte[] bytes) {
     final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -109,6 +115,9 @@ public class StringUtils {
    *
    * @param hex String of pairs of hexadecimal numbers
    * @return byte-array with the binary representation of the hex-string
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static byte[] hexToBytes(String hex) {
     byte[] bytes = new byte[hex.length() >> 1];
@@ -129,6 +138,9 @@ public class StringUtils {
    * @return the hexadecimal representation of the hash
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String sha1Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return bytesToHex(computeHash(text, HASH_SHA1));
@@ -142,6 +154,9 @@ public class StringUtils {
    * @return a truncated int-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int sha1HashInt(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToInt(computeHash(text, HASH_SHA1));
@@ -155,6 +170,9 @@ public class StringUtils {
    * @return a truncated long-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the SHA-1 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long sha1HashLong(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToLong(computeHash(text, HASH_SHA1));
@@ -168,6 +186,9 @@ public class StringUtils {
    * @return the hexadecimal representation of the hash
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String md5Hash(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return bytesToHex(computeHash(text, HASH_MD5));
@@ -181,6 +202,9 @@ public class StringUtils {
    * @return a truncated int-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int md5HashInt(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToInt(computeHash(text, HASH_MD5));
@@ -194,6 +218,9 @@ public class StringUtils {
    * @return a truncated long-value of the hash.
    * @throws NoSuchAlgorithmException thrown if the MD-5 algorithm cannot be found
    * @throws UnsupportedEncodingException thrown if the encoding is not supported
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long md5HashLong(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
     return truncateHashToLong(computeHash(text, HASH_MD5));
@@ -204,6 +231,9 @@ public class StringUtils {
    *
    * @param hash the hash-string
    * @return truncated code as int
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int truncateHashToInt(String hash) {
     return truncateHashToInt(hexToBytes(hash));
@@ -214,6 +244,9 @@ public class StringUtils {
    *
    * @param bytes hash-value as a byte-array
    * @return truncated code as int
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static int truncateHashToInt(byte[] bytes) {
     int offset = bytes[bytes.length - 1] & 0x0f;
@@ -228,6 +261,9 @@ public class StringUtils {
    *
    * @param hash the hash-string
    * @return truncated code as long
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long truncateHashToLong(String hash) {
     return truncateHashToLong(hexToBytes(hash));
@@ -238,6 +274,9 @@ public class StringUtils {
    *
    * @param bytes the hash-value as a byte-array
    * @return truncated code as long
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static long truncateHashToLong(byte[] bytes) {
     int offset = bytes[bytes.length - 1] & 0x0c;
@@ -265,6 +304,9 @@ public class StringUtils {
    * @param size The size the text is to shortened to.
    * @param mode The mode in which the string shall be shortened
    * @return The shortened string.
+   *
+   * @since Class 1.2
+   * @since API 1.2.0
    */
   public static String shorten(String text, int size, int mode) {
     StringBuilder temp = null;
@@ -291,5 +333,50 @@ public class StringUtils {
       }
     }
     return temp.toString();
+  }
+
+  /**
+   * Counts the number of occurrences of the given character.
+   *
+   * @param haystack The string in which to search for the given character.
+   * @param needle The character to search for.
+   * @return The total number of occurrences of the given character.
+   *
+   * @since Class 1.3
+   * @since API 1.4.0
+   */
+  public static int countOccurrences(String haystack, char needle) {
+    int result = 0;
+    int index = haystack.indexOf(needle, 0);
+    int length = haystack.length();
+    while (index > -1) {
+      result++;
+      int startFrom = index + 1;
+      index = (startFrom < length) ? haystack.indexOf(needle, startFrom) : -1;
+    }
+    return result;
+  }
+
+  /**
+   * Counts the number of occurrences of the given character.
+   *
+   * @param haystack The string in which to search for the given character.
+   * @param needle The character to search for.
+   * @return The total number of occurrences of the given character.
+   *
+   * @since Class 1.3
+   * @since API 1.4.0
+   */
+  public static int countOccurrences(String haystack, String needle) {
+    int result = 0;
+    int index = haystack.indexOf(needle, 0);
+    int haystackLength = haystack.length();
+    int needleLength = needle.length();
+    while (index > -1) {
+      result++;
+      int startFrom = index + needleLength;
+      index = (startFrom < haystackLength) ? haystack.indexOf(needle, startFrom) : -1;
+    }
+    return result;
   }
 }

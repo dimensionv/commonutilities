@@ -52,6 +52,11 @@ public class StringUtilsTest {
 
   private static final String TEST_STRING = "The quick brown fox jumps over the lazy dog";
 
+  private static final char TEST_NEEDLE_CHAR = ' ';
+  private static final int TEST_OCCURRENCES_CHAR = 8;
+  private static final String TEST_NEEDLE_STRING = "fox";
+  private static final int TEST_OCCURRENCES_STRING = 1;
+
   private static final String TEST_HASH_SHA1 = "2fd4e1c67a2d28fced849ee1bb76e7391b93eb12";
   private static final byte[] TEST_HASH_SHA1_BYTES = new byte[]{
     0x2f, (byte) 0xd4, (byte) 0xe1, (byte) 0xc6, 0x7a, 0x2d, 0x28, (byte) 0xfc, (byte) 0xed, (byte) 0x84,
@@ -318,5 +323,25 @@ public class StringUtilsTest {
     int size = expResult.length();
     String result = StringUtils.shorten(TEST_STRING, size, StringUtils.SHORTEN_END);
     Assert.assertEquals(expResult, result);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_char() {
+    System.out.println("countOccurrences String/Char");
+    int result = StringUtils.countOccurrences(TEST_STRING, TEST_NEEDLE_CHAR);
+    Assert.assertEquals(TEST_OCCURRENCES_CHAR, result);
+  }
+
+  /**
+   * Test of countOccurrences method, of class StringUtils.
+   */
+  @Test
+  public void testCountOccurrences_String_String() {
+    System.out.println("countOccurrences String/String");
+    int result = StringUtils.countOccurrences(TEST_STRING, TEST_NEEDLE_STRING);
+    Assert.assertEquals(TEST_OCCURRENCES_STRING, result);
   }
 }
