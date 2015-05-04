@@ -28,10 +28,10 @@ package de.dimensionv.java.libraries.common.utilities.file.filefilters;
 import java.io.File;
 
 /**
- * A FileFilter that allows directories only.
+ * A FileFilter that allows files only.
  * <p>
- * Depending on how it's initialized, it can also show hidden directories. The default behavior is to not show hidden
- * directories.</p>
+ * Depending on how it's initialized, it can also show hidden files. The default behavior is to not show hidden
+ * files.</p>
  *
  * @author Volkmar Seifert &lt;vs@DimensionV.de&gt;
  *
@@ -41,8 +41,7 @@ import java.io.File;
 public class FileFileFilter extends AbstractFileFilter {
 
   /**
-   * Default constructor that initializes the DirectoryFileFilter with it's default behavior, meaning hidden directories
-   * will not be shown.
+   * Creates a new {@code FileFileFilter} object with the default behavior, meaning hidden files will not be shown.
    *
    * @since Class 1.0
    * @since API 1.3.0
@@ -53,22 +52,28 @@ public class FileFileFilter extends AbstractFileFilter {
 
   /**
    * <p>
-   * Constructor that initializes the DirectoryFileFilter with the behavior defined by the parameter
-   * <code>showHidden</code>.</p>
+   * Creates a new {@code FileFileFilter} object with the behavior defined by the parameter {@code showHidden}.</p>
    * <ul>
-   * <li><code>true</code> will enable the display of hidden directories.</li>
-   * <li><code>false</code> will enable the default behavior of not showing hidden directories.</li>
+   * <li>{@code true} will enable the display of hidden files.</li>
+   * <li>{@code false} will enable the default behavior of not showing hidden files.</li>
    * </ul>
    *
-   * @param includeHiddenDirectories Defines whether to show hidden directories or not.
+   * @param showHidden Defines whether to show hidden files or not.
    *
    * @since Class 1.0
    * @since API 1.3.0
    */
-  public FileFileFilter(boolean includeHiddenDirectories) {
-    super(includeHiddenDirectories);
+  public FileFileFilter(boolean showHidden) {
+    super(showHidden);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @param file The {@code File} object to check
+   * @return {@literal true} if the file matches the criteria (at least "{@link File#isFile()}"), {@literal false}
+   * otherwise.
+   */
   @Override
   public boolean accept(File file) {
     if (showHidden) {

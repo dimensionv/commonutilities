@@ -42,6 +42,8 @@ import java.util.Comparator;
  */
 public final class NaturalSortComparator implements Comparator {
 
+  private static NaturalSortComparator INSTANCE = null;
+
   /**
    * Meta-data for the actual {@link String} object that should be compared.
    */
@@ -288,5 +290,12 @@ public final class NaturalSortComparator implements Comparator {
         : (char) 0;
 
     return sortBean.character;
+  }
+
+  public static final NaturalSortComparator getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new NaturalSortComparator();
+    }
+    return INSTANCE;
   }
 }

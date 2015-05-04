@@ -193,7 +193,7 @@ public class NaturalSortComparatorTest {
     // now disrupt the order of the original data by shuffling it around :)
     Collections.shuffle(shuffledData);
     // and sort the shuffled array using the NaturalSortComparator...
-    Collections.sort(shuffledData, new NaturalSortComparator());
+    Collections.sort(shuffledData, NaturalSortComparator.getInstance());
     // transform list back into an array for the assert...
     String[] result = (String[]) shuffledData.toArray(new String[shuffledData.size()]);
 
