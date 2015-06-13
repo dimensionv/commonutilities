@@ -132,6 +132,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithoutHiddenFile(boolean expResult) {
     System.out.println("accept for file without hidden directories");
     instance.setShowHidden(false);
+    Assert.assertFalse(instance.isShowHidden());
     boolean result = instance.accept(file);
     Assert.assertEquals(expResult, result);
   }
@@ -139,6 +140,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithoutHiddenHiddenFile(boolean expResult) {
     System.out.println("accept for file without hidden directories");
     instance.setShowHidden(false);
+    Assert.assertFalse(instance.isShowHidden());
     boolean result = instance.accept(hiddenFile);
     Assert.assertEquals(expResult, result);
   }
@@ -146,6 +148,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithoutHiddenDirectory(boolean expResult) {
     System.out.println("accept for directory without hidden directories");
     instance.setShowHidden(false);
+    Assert.assertFalse(instance.isShowHidden());
     boolean result = instance.accept(directory);
     Assert.assertEquals(expResult, result);
   }
@@ -153,6 +156,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithoutHiddenHiddenDirectory(boolean expResult) {
     System.out.println("accept for hidden directory without hidden directories");
     instance.setShowHidden(false);
+    Assert.assertFalse(instance.isShowHidden());
     boolean result = instance.accept(hiddenDirectory);
     Assert.assertEquals(expResult, result);
   }
@@ -160,6 +164,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithHiddenFile(boolean expResult) {
     System.out.println("accept for file with hidden directories");
     instance.setShowHidden(true);
+    Assert.assertTrue(instance.isShowHidden());
     boolean result = instance.accept(file);
     Assert.assertEquals(expResult, result);
   }
@@ -167,6 +172,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithHiddenHiddenFile(boolean expResult) {
     System.out.println("accept for file without hidden directories");
     instance.setShowHidden(true);
+    Assert.assertTrue(instance.isShowHidden());
     boolean result = instance.accept(hiddenFile);
     Assert.assertEquals(expResult, result);
   }
@@ -174,6 +180,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithHiddenDirectory(boolean expResult) {
     System.out.println("accept for directory with hidden directories");
     instance.setShowHidden(true);
+    Assert.assertTrue(instance.isShowHidden());
     boolean result = instance.accept(directory);
     Assert.assertEquals(expResult, result);
   }
@@ -181,6 +188,7 @@ public abstract class AbstractFileFilterTest {
   protected void checkAcceptWithHiddenHiddenDirectory(boolean expResult) {
     System.out.println("accept for hidden directory with hidden directories");
     instance.setShowHidden(true);
+    Assert.assertTrue(instance.isShowHidden());
     boolean result = instance.accept(hiddenDirectory);
     Assert.assertEquals(expResult, result);
   }

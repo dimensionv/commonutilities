@@ -108,9 +108,8 @@ public class NaturalSortComparatorTest {
     System.out.println("Test NaturalSortComparator.compare() with leading zeroed numbers: less-than");
     String s1 = "Bla000109";
     String s2 = "Bla000110";
-    NaturalSortComparator instance = new NaturalSortComparator();
     int expResult = -1;
-    int result = instance.compare(s1, s2);
+    int result = NaturalSortComparator.getInstance().compare(s1, s2);
     Assert.assertEquals(expResult, result);
   }
 
@@ -119,9 +118,8 @@ public class NaturalSortComparatorTest {
     System.out.println("Test NaturalSortComparator.compare() with leading zeroed numbers: greater-than");
     String s1 = "Bla000110";
     String s2 = "Bla000109";
-    NaturalSortComparator instance = new NaturalSortComparator();
     int expResult = 1;
-    int result = instance.compare(s1, s2);
+    int result = NaturalSortComparator.getInstance().compare(s1, s2);
     Assert.assertEquals(expResult, result);
   }
 
@@ -130,9 +128,8 @@ public class NaturalSortComparatorTest {
     System.out.println("Test NaturalSortComparator.compare() with leading zeroed numbers: equals");
     String s1 = "Bla000110";
     String s2 = "Bla000110";
-    NaturalSortComparator instance = new NaturalSortComparator();
     int expResult = 0;
-    int result = instance.compare(s1, s2);
+    int result = NaturalSortComparator.getInstance().compare(s1, s2);
     Assert.assertEquals(expResult, result);
   }
 
@@ -179,7 +176,8 @@ public class NaturalSortComparatorTest {
     String[] originalData = new String[]{
       "1-04", "1-4", "1-40", "10-40", "Alice", "Bob", "Charly",
       "a6-b6", "h2-i7", "item01", "item02", "item02a", "item2", "item3",
-      "item00004", "item4", "item 4 else", "item05", "item 5", "item 5",
+      "item00004", "item00004", "item00004", "item00004", "item00004",
+      "item4", "item 4 else", "item05", "item 5", "item 5",
       "item 5 something", "item 6", "item    8", "item128", "item128a",
       "item255", "item256", "item04096", "item04096 test 1",
       "item04096 test 2", "item04096 test 2a", "item04096 test 2b",
